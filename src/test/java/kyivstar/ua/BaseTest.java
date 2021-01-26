@@ -33,8 +33,7 @@ public abstract class BaseTest {
 
     @After
     public void out() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //driver.quit();
+        driver.quit();
     }
 
 }
