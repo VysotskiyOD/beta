@@ -8,14 +8,9 @@ public class TariffsTest extends BaseTest {
     @Test
     public void WhenPageOpenThenAssertUrl() {
 
-        new TariffsPage(driver).assertThanTariffsPage();
+        new Utils(driver).assertPageEqualsCurrentUrl("http://beta.kyivstar.ua/tariffs");
     }
 
-    @Test
-    public void WhenPageOpenThenAssertTitle() {
-
-        new TariffsPage(driver).assertTitleTariffsPage();
-    }
 
     @Test
     public void WhenTariffsPageOpenClickFilterPrepaidThenAssertDisableFilterPostpaid() {
@@ -37,15 +32,9 @@ public class TariffsTest extends BaseTest {
     }
 
     @Test
-    public void WhenTariffsArchivePageOpenAssertTitle() {
-        new TariffsPage(driver).clickOnTariffsArchiveLink();
-        new TariffsArchivePage(driver).assertTitleTariffsArchivePage();
-    }
-
-    @Test
     public void WhenTariffsArchivePageOpenAssertURL() {
         new TariffsPage(driver).clickOnTariffsArchiveLink();
-        new TariffsArchivePage(driver).assertThanTariffsArchivePage();
+        new Utils(driver).assertPageEqualsCurrentUrl("https://kyivstar.ua/uk/mm/tariffs/arhive");
     }
 
     @Test
@@ -58,7 +47,7 @@ public class TariffsTest extends BaseTest {
     public void assertInfoTariffsWithTariffPage() {
         new  TariffsPage(driver)
                 .clickInfoActiveTariffsWithTariffPage();
-        new  TariffDetailPage(driver).assertTariffsInfoWithDetailPage();
+        new  Utils(driver).assertPageStartsWithCurrentUrl("http://beta.kyivstar.ua/tariffs");
 
     }
 
@@ -66,7 +55,7 @@ public class TariffsTest extends BaseTest {
     @Test
     public void assertThanPayPage() {
         new TariffsPage(driver).clickButtonTopUpAccount();
-        new PayPage(driver).assertPayPageWithCurrentUrl();
+        new Utils(driver).assertPageEqualsCurrentUrl("https://pay.kyivstar.ua/");
     }
 
     @Test
@@ -81,7 +70,7 @@ public class TariffsTest extends BaseTest {
     public void assertClickPlugTariffClickYesThanLoginPage() {
         new TariffsPage(driver).clickPlugTariffOnTariffPage()
                 .clickButtonPlugTariffYes();
-        new LoginPage(driver).assertLoginPageWithCurrentUrl();
+        new Utils(driver).assertPageStartsWithCurrentUrl("https://account.kyivstar.ua/cas/login");
     }
 
     @Test
@@ -89,25 +78,25 @@ public class TariffsTest extends BaseTest {
         new TariffsPage(driver).clickPlugTariffOnTariffPage()
                 .clickButtonPlugTariffNo()
                 .clickButtonPlugTariffNoNewNumber();
-        new MnpPage(driver).assertMnpPageWithCurrentUrl();
+        new Utils(driver).assertPageEqualsCurrentUrl("https://mnp.kyivstar.ua/");
     }
 
     @Test
-    public void assertClickPlugTariffClickNoClickNewNumberClickDeliveryThanMnpPage() {
+    public void assertClickPlugTariffClickNoClickNewNumberClickDeliveryThanShopPage() {
         new TariffsPage(driver).clickPlugTariffOnTariffPage()
                 .clickButtonPlugTariffNo()
                 .clickButtonPlugTariffNewNumber()
                 .clickButtonPlugTariffNoNewNumberDelivery();
-        new ShopPage(driver).assertShopPageWithCurrentUrl();
+        new Utils(driver).assertPageEqualsCurrentUrl("https://shop.kyivstar.ua/");
     }
 
     @Test
-    public void assertClickPlugTariffClickNoClickNewNumberClickFindMarketThanMnpPage() {
+    public void assertClickPlugTariffClickNoClickNewNumberClickFindMarketThanServiceCentersListPage() {
         new TariffsPage(driver).clickPlugTariffOnTariffPage()
                 .clickButtonPlugTariffNo()
                 .clickButtonPlugTariffNewNumber()
                 .clickButtonPlugTariffNoNewNumberFindMarket();
-        new ServiceCentersListPage(driver).assertServiceCentersListPageWithCurrentUrl();
+        new Utils(driver).assertPageEqualsCurrentUrl("https://kyivstar.ua/uk/mm/service/centers/list");
     }
 
 }

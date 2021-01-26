@@ -10,6 +10,7 @@ public class LoginPage {
         this.driver = driver;
     }
 
+
     public LoginPage assertLoginPageWithCurrentUrl() {
         Assert.assertTrue(driver.getCurrentUrl()
                 .startsWith("https://account.kyivstar.ua/cas/login"));

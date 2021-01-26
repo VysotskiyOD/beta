@@ -11,7 +11,6 @@ import java.util.*;
 public class TariffsPage {
 
     private WebDriver driver;
-    private final String titlePage = "Тарифи";
     private final String okCheckboxPrepaid = "prepaid";
     private final String okCheckboxPostpaid = "postpaid";
     private final String xPathCheckboxPostpaid = "//label[@for='postpaid']";
@@ -21,8 +20,6 @@ public class TariffsPage {
     private final String infoTariffs = "//a[@class='link link--m link--decoration-none TariffItem_tariff-item__more__3DGRT']";
     private final String infoActiveTariffs = "//div[contains(@class,'slick-slide slick-active')]";
     private final String buttonTopUpAccount = "//span[contains(text(), 'Поповнити рахунок')]";
-    private final String buttonLinkGoogle = "//a[@aria-label='google-store-link']";
-    private final String buttonLinkApple = "//a[@aria-label='app-store-link']";
     private final String buttonPlugTariff = "//span[contains(text(), 'Підключити')]";
     private final String buttonPlugTariffYes = "//span[contains(text(), 'Так')]";
     private final String buttonPlugTariffNo = "//span[contains(text(), 'Ні')]";
@@ -39,45 +36,28 @@ public class TariffsPage {
 
 
 
-    public TariffsPage assertThanTariffsPage() {
-        Assert.assertTrue(driver.getCurrentUrl()
-                .startsWith("http://beta.kyivstar.ua/tariffs"));
-        return this;
-    }
-
-    public TariffsPage assertTitleTariffsPage() {
-        Assert.assertTrue(driver.getTitle().contentEquals(titlePage));
-        return this;
-    }
-
     public TariffsPage clickButtonTopUpAccount() {
         driver.findElement(By.xpath(buttonTopUpAccount)).click();
         return this;
     }
 
- /*   public TariffsPage clickButtonLinkGoogle() {
-        driver.findElement(By.xpath(buttonLinkGoogle)).click();
-        return this;
-    }
 
-    public TariffsPage clickButtonLinkApple() {
-        driver.findElement(By.xpath(buttonLinkApple)).click();
-        return this;
-    }
-*/
     public TariffsPage assertSelectFiltersWithTariffs() {
         List<WebElement> findElementsTabs = driver.findElements(By.xpath(xPathCheckPassport));
-            if(driver.findElement(By.id(okCheckboxPostpaid)).isEnabled()
-                & driver.findElement(By.id(okCheckboxPrepaid)).isEnabled())
-            {
-                for(int i = 0; i<findElementsTabs.size(); i++){
-                    if (findElementsTabs.get(i).getText().contains("паспорт"))
+        Boolean checkboxPostpaidisEnabled = driver.findElement(By.id(okCheckboxPostpaid)).isEnabled();
+        Boolean checkboxPrepaidisEnabled = driver.findElement(By.id(okCheckboxPostpaid)).isEnabled();
+        if(checkboxPostpaidisEnabled
+                & checkboxPrepaidisEnabled)
+        {
+            for(int i = 0; i<findElementsTabs.size(); i++){
+                if (findElementsTabs.get(i).getText().contains("паспорт"))
                     Assert.assertTrue(findElementsTabs.get(i).getText().startsWith("Підключаємо"));
-                }
             }
 
-        if(!driver.findElement(By.id(okCheckboxPostpaid)).isEnabled()
-                & driver.findElement(By.id(okCheckboxPrepaid)).isEnabled())
+        }
+
+        if(!checkboxPostpaidisEnabled
+                & checkboxPrepaidisEnabled)
         {
             for(int i = 0; i<findElementsTabs.size(); i++){
                 if (findElementsTabs.get(i).getText().contains("паспорт"))
@@ -85,8 +65,8 @@ public class TariffsPage {
             }
         }
 
-        if(driver.findElement(By.id(okCheckboxPostpaid)).isEnabled()
-                & !driver.findElement(By.id(okCheckboxPrepaid)).isEnabled())
+        if(checkboxPostpaidisEnabled
+                & !checkboxPrepaidisEnabled)
         {
             for(int i = 0; i<findElementsTabs.size(); i++){
                 if (findElementsTabs.get(i).getText().contains("паспорт"))
@@ -101,9 +81,11 @@ public class TariffsPage {
     public TariffsPage assertSelectTariffsFiltersWithDisplaysTariffs() {
         List<WebElement> findElementsTariffs = driver.findElements(By.xpath(xPathCheckPassport));
         List<String> distinctNeedHavePassport = new ArrayList<>();
+        Boolean checkboxPostpaidisEnabled = driver.findElement(By.id(okCheckboxPostpaid)).isEnabled();
+        Boolean checkboxPrepaidisEnabled = driver.findElement(By.id(okCheckboxPostpaid)).isEnabled();
 
-        if(driver.findElement(By.id(okCheckboxPostpaid)).isEnabled()
-                & driver.findElement(By.id(okCheckboxPrepaid)).isEnabled())
+        if(checkboxPostpaidisEnabled
+                & checkboxPrepaidisEnabled)
         {
 
             for (WebElement element : findElementsTariffs) {
@@ -116,8 +98,8 @@ public class TariffsPage {
 
         }
 
-        if(!driver.findElement(By.id(okCheckboxPostpaid)).isEnabled()
-                & driver.findElement(By.id(okCheckboxPrepaid)).isEnabled())
+        if(!checkboxPostpaidisEnabled
+                & checkboxPrepaidisEnabled)
         {
             for (WebElement element : findElementsTariffs) {
                 if (!distinctNeedHavePassport.contains(element.getText())
@@ -128,8 +110,8 @@ public class TariffsPage {
             Assert.assertTrue(distinctNeedHavePassport.size()==1);
         }
 
-        if(driver.findElement(By.id(okCheckboxPostpaid)).isEnabled()
-                & !driver.findElement(By.id(okCheckboxPrepaid)).isEnabled())
+        if(checkboxPostpaidisEnabled
+                & !checkboxPrepaidisEnabled)
         {
             for (WebElement element : findElementsTariffs) {
                 if (!distinctNeedHavePassport.contains(element.getText())
@@ -153,9 +135,9 @@ public class TariffsPage {
         System.out.println(countClickActiveTariffs);
 
         int randomIndex = rand.nextInt(countClickActiveTariffs);
-                String URLTarrif = findElementsTariffsInfoHref.get(randomIndex).getAttribute("href")
-                        .replaceAll("/tariffs","");
-                findElementsTariffsInfoHref.get(randomIndex).click();
+        String URLTarrif = findElementsTariffsInfoHref.get(randomIndex).getAttribute("href")
+                .replaceAll("/tariffs","");
+        findElementsTariffsInfoHref.get(randomIndex).click();
         return this;
     }
 
@@ -246,7 +228,7 @@ public class TariffsPage {
     }
 
     public TariffsPage clickOnTariffsArchiveLink() {
-            driver.findElement(By.xpath(tariffsArchiveLink)).click();
+        driver.findElement(By.xpath(tariffsArchiveLink)).click();
         return this;
     }
 
