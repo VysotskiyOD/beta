@@ -26,7 +26,7 @@ public abstract class BaseTest {
             e.printStackTrace();
         }
         driver = new RemoteWebDriver(host, capabilities);
-        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         driver.manage().window().maximize();
         driver.get("http://beta.kyivstar.ua/tariffs");
     }
