@@ -1,7 +1,8 @@
 package kyivstar.ua;
 
+import kyivstar.TariffsPage;
+import kyivstar.Utils;
 import org.junit.Test;
-import ua.kyivstar.*;
 
 public class TariffsTest extends BaseTest {
 

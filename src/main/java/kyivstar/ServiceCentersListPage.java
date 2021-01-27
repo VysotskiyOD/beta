@@ -1,4 +1,4 @@
-package ua.kyivstar;
+package kyivstar;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
