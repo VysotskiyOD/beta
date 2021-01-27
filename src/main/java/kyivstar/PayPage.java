@@ -1,18 +1,18 @@
-package ua.kyivstar;
+package kyivstar;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 
-public class MnpPage {
+public class PayPage {
     private WebDriver driver;
 
-    public MnpPage(WebDriver driver) {
+    public PayPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    public MnpPage assertMnpPageWithCurrentUrl() {
+    public PayPage assertPayPageWithCurrentUrl() {
         Assert.assertTrue(driver.getCurrentUrl()
-                .startsWith("https://mnp.kyivstar.ua/"));
+                .startsWith("https://pay.kyivstar.ua"));
         return this;
     }
 }

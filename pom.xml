@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ua.kyivstar</groupId>
-    <artifactId>kyivstar.ua</artifactId>
-    <version>0.0.1</version>
+    <artifactId>beta1</artifactId>
+    <version>0.0.2</version>
 
     <properties>
         <aspectj.version>1.8.10</aspectj.version>
